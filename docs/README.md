@@ -63,7 +63,7 @@ optional arguments:
 
 1. The code here only works because each Cloudera AWS users needs to tag their instances with an *owner* tag that matches their user name. In this case it's the $USER environment variable when you log into your Mac.  See end of the Readme if your owner tag does not match you Mac bash $USER variable
 
-2. You will need a working AWS configuration that has credentials set so that no login is required. See AWS boto3 quickstart [documentation](http://boto3.readthedocs.io/en/latest/guide/quickstart.html). For example  ~/.aws/credentials would have the lines below with your credentials filled in:
+2. You will need a working AWS configuration that has credentials set so that no login is required. You shouldn't need to install the AWS CLI. See AWS boto3 quickstart [documentation](http://boto3.readthedocs.io/en/latest/guide/quickstart.html). For example  ~/.aws/credentials would have the lines below with your credentials filled in:
 ```
   [default]
   aws_access_key_id = XXXXXX...ZZZZZ
