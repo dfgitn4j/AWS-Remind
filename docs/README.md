@@ -121,7 +121,7 @@ optional arguments:
     ```
     
 #### *_If Using pre-built / packaged Binary_*
-1. Download the file in the dist folder of this repository [here](/dist/awsbitbar.10m) into the plugin directory (e.g. ~/bitBar).  
+1. Download the file in the dist folder of this repository [here](/dist/) into the plugin directory (e.g. ~/bitBar).  
 
 2. Make the file executable
     ```
