@@ -1,0 +1,16 @@
+altgraph==0.14
+boto3==1.4.2
+botocore==1.4.93
+dis3==0.1.1
+docutils==0.14
+future==0.16.0
+futures==3.1.1
+jmespath==0.9.3
+macholib==1.8
+pefile==2017.9.3
+PyInstaller==3.3
+python-dateutil==2.6.1
+pytz==2017.3
+s3transfer==0.1.11
+six==1.11.0
+
