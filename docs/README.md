@@ -1,4 +1,4 @@
-# Mac OS X menu bar AWS instance state watcher for Cloudera
+# Mac OS X menu bar AWS instance state watcher for tagged instances
 
 ### _Ever get busy and don't remember what AWS EC2<sup>[*](#footnote1)</sup> instances you have running:interrobang:_
 
@@ -6,7 +6,13 @@
 
 ![](full_menubar.png)
 
-This project uses [BitBar](https://getbitbar.com), a freely available tool that displays the output of a script into a Mac OS X menubar item. The python program / executable in this project will query AWS EC2 for instances based on the Cloudera required owner tag.  
+This project uses [BitBar](https://getbitbar.com), a freely available tool that displays the output of a script into a Mac OS X menubar item. The python program / executable in this project will query AWS EC2 for instances based on each instance having a tag named "owner" whith the value being your local user id. If the user id of the local user is "danWho", e.g.: 
+```
+# echo $USER
+danWho
+```
+
+Then the AWS tag would be owner=danWho
   
 The execution is very lightweight, but I would not recommend going below 5 minutes. No particular reason outside of giving time for the AWS queries to run (which typically take less than 2 seconds), and it just feels right. I've been using a 10 minute interval configuration as descibed in [Script Usage](#script-usage). 
 
@@ -14,7 +20,7 @@ There also is a command line option for plain terminal output that displays the 
 
 There's pre-built PyInstaller executable version of the python script for those that may run into issues with Python imports, etc. It's built with boto3 v1.4.2 because the latest version of the boto3 package does not seem to work with the latest version of PyInstaller. 
 
-<a name="footnote1">*</a>_**AWS native instances, not Cloudcat instances**_
+<a name="footnote1">*</a>_**AWS native instances**_
 
 ------
 ## Table of Contents
@@ -23,7 +29,7 @@ There's pre-built PyInstaller executable version of the python script for those 
 - [Setup](#setup)
 - [Install](#install)  
     + [Install BitBar](#a-install-bitbar)  
-    + [Install Script or Binary](#b-install-script-or-prebuilt-binary)  
+    + [Install AWS Watcher Script or Binary](#b-install-aws-watcher-script-or-prebuilt-binary)  
 - [Run BitBar App](#run-bitbar)  
 - [Notes](#notes)
 - [Support](#support)
@@ -61,7 +67,7 @@ optional arguments:
 
 ### Prerequisites and things you will need and are good to know
 
-1. The code here only works because each Cloudera AWS users needs to tag their instances with an *owner* tag that matches their user name. In this case it's the $USER environment variable when you log into your Mac.  See end of the Readme if your owner tag does not match you Mac bash $USER variable
+1. Again, the code here only works because each AWS users needs to tag their instances with an *owner* tag that matches their *local user name*. In this case it's the $USER environment variable when you log into your Mac.  See end of the Readme if your owner tag does not match you Mac bash $USER variable
 
 2. You will need a working AWS configuration that has credentials set so that no login is required. You shouldn't need to install the AWS CLI. See AWS boto3 quickstart [documentation](http://boto3.readthedocs.io/en/latest/guide/quickstart.html). For example  ~/.aws/credentials would have the lines below with your credentials filled in:
 ```
@@ -80,19 +86,22 @@ optional arguments:
 
 ### Install
 
-#### A Install BitBar
+#### A. Install BitBar
 
 1. Download bitbar, unzip, and install by dragging to your Applications folder.  
     * Direct download is here: https://github.com/matryer/bitbar/releases/latest   
     Get the zip file named BitBar-v#.#.#.zip.
     * github is here: https://github.com/matryer/bitbar  
     
-2. You will need to create a bitbar plugins directory to put the code file(s) it is going to run. e.g.
+2. You will need to create a bitbar plugins directory to put the code file(s) it is going to run. e.g.:
     ```
     mkdir ~/bitBbar
     ```   
-
-#### B Install Script or Prebuilt Binary
+    The plugin directory is configurable under the bitbar preferences pulldown menu, or is set when you first login:
+    
+    ![](full_menubar.png)
+    
+#### B. Install AWS Watcher Script or Prebuilt Binary
 
 #### *_If Using Python File_*
 1. Install the boto3 and pytz Python packages
@@ -106,7 +115,7 @@ optional arguments:
 ```
   pip install --user -r requirements.txt 
 ```
-        Any virtualenv errors, etc. are past what we're trying to accomplish here.  
+   *Any virtualenv errors, etc. are past what we're trying to accomplish here.* 
 
 2. Download or copy / paste the file awsbitbar.10m.py from this respository into the plugin directory (e.g. ~/bitBar).   
 
@@ -152,7 +161,7 @@ optional arguments:
       ```[os.environ['USER']```  
   _with:_  
     ```'myAWSownerTagValue'```
-
+  Same for tag name (should be command line options...)
 * The executable download was created with the PyInstaller utility: 
     ```
     pyinstaller --clean --onefile --noupx awsbitbar.refreshRate.py
