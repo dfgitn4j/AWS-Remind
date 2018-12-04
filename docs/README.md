@@ -1,4 +1,4 @@
-# Mac OS X menu bar AWS instance state watcher for Cloudera
+# Mac OS X menu bar AWS instance state watcher 
 
 ### _Ever get busy and don't remember what AWS EC2<sup>[*](#footnote1)</sup> instances you have running:interrobang:_
 
