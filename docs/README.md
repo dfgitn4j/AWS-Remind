@@ -59,7 +59,7 @@ optional arguments:
 -----
 ## Setup
 
-### Prerequisites and things you will need and are good to know
+### Prerequisites and things you will need that are good to know
 
 1. The code here only works if AWS users tag their instances with an *owner* tag that matches their user name. In this case it's the $USER environment variable when you log into your Mac.  See end of the Readme if your owner tag does not match you Mac bash $USER variable
 
