@@ -6,7 +6,7 @@
 
 ![](full_menubar.png)
 
-This project uses [BitBar](https://getbitbar.com), a freely available tool that displays the output of a script into a Mac OS X menubar item. The python program / executable in this project will query AWS EC2 for instances based on the Cloudera required owner tag.  
+This project uses [BitBar](https://getbitbar.com), a freely available tool that displays the output of a script into a Mac OS X menubar item. The python program / executable in this project will query AWS EC2 for instances based on instances having an owner tag.  
   
 The execution is very lightweight, but I would not recommend going below 5 minutes. No particular reason outside of giving time for the AWS queries to run (which typically take less than 2 seconds), and it just feels right. I've been using a 10 minute interval configuration as descibed in [Script Usage](#script-usage). 
 
@@ -14,7 +14,7 @@ There also is a command line option for plain terminal output that displays the 
 
 There's pre-built PyInstaller executable version of the python script for those that may run into issues with Python imports, etc. It's built with boto3 v1.4.2 because the latest version of the boto3 package does not seem to work with the latest version of PyInstaller. 
 
-<a name="footnote1">*</a>_**AWS native instances, not Cloudcat instances**_
+<a name="footnote1">*</a>_**AWS native instances, not 3rd party instance managers**_
 
 ------
 ## Table of Contents
@@ -61,7 +61,7 @@ optional arguments:
 
 ### Prerequisites and things you will need and are good to know
 
-1. The code here only works because each Cloudera AWS users needs to tag their instances with an *owner* tag that matches their user name. In this case it's the $USER environment variable when you log into your Mac.  See end of the Readme if your owner tag does not match you Mac bash $USER variable
+1. The code here only works if AWS users tag their instances with an *owner* tag that matches their user name. In this case it's the $USER environment variable when you log into your Mac.  See end of the Readme if your owner tag does not match you Mac bash $USER variable
 
 2. You will need a working AWS configuration that has credentials set so that no login is required. You shouldn't need to install the AWS CLI. See AWS boto3 quickstart [documentation](http://boto3.readthedocs.io/en/latest/guide/quickstart.html). For example  ~/.aws/credentials would have the lines below with your credentials filled in:
 ```
@@ -136,7 +136,7 @@ optional arguments:
 ## Run BitBar
 1. Start BitBar
   * Open the BitBar application. Use the location you placed the python code or executable file (e.g. ~/bitBar) for the BitBar plug-in directory that BitBar will prompt for on the first run. You can change this in BitBar preferences later, or if you skipped this step on startup by:  
-      + Click on the BitBar menubar app and choose Preferences->Change Plugin Folder.. Then choose Refresh, or &#8984;R.
+      + Click on the BitBar menubar app and choose Preferences->Change Plugin Folder. Then choose Refresh, or &#8984;R.
 
 *_NOTE:_* BitBar will attempt to run _any file_ it finds in the plugin folder  An invalid script will show an error in the menubar.
 
